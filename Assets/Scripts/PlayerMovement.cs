@@ -15,11 +15,13 @@ public class PlayerMovement : MonoBehaviour //creates a Unity component
     private SpriteRenderer spriteRenderer;    //spriterenderrer attached to a player
 
     private MapBounds mapBounds;
+    private PolygonCollider2D playerCollider;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();   // find the spriterenderer on this gameObject and store reference to it
-        mapBounds = FindFirstObjectByType<MapBounds>();
+        mapBounds = FindAnyObjectByType<MapBounds>();
+        playerCollider = GetComponent<PolygonCollider2D>();
     }
    
    
@@ -43,9 +45,11 @@ public class PlayerMovement : MonoBehaviour //creates a Unity component
     void LimitBounds()
     {
         Vector3 position = transform.position;   // copy of the palyer's current position
+        Bounds colliderBounds = playerCollider.bounds;
+        Vector3 extents = colliderBounds.extents;
 
-        position.x = Mathf.Clamp(position.x, mapBounds.left, mapBounds.right);   //bounds for X
-        position.y = Mathf.Clamp(position.y, mapBounds.bottom, mapBounds.top);   // bounds for y
+        position.x = Mathf.Clamp(position.x, mapBounds.left + extents.x, mapBounds.right - extents.x);   //bounds for X
+        position.y = Mathf.Clamp(position.y, mapBounds.bottom + extents.y, mapBounds.top - extents.y);   // bounds for y
 
         transform.position = position;   //get player back to the position between bounds
     }

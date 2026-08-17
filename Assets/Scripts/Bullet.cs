@@ -41,6 +41,10 @@ public class Bullet : MonoBehaviour
             Vector3 direction = (closestEnemy.transform.position - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
         
     }
     void OnCollisionEnter2D(Collision2D collision)
