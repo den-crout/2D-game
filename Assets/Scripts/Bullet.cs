@@ -5,13 +5,13 @@ public class Bullet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public float speed = 10f;
-    public float damage = 2f;
+    public float damage = 5f;
     private GameObject[] enemies;
 
 
     void Start()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        
     }
 
     // Update is called once per frame
@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
 
     void MovementToEnemy()
     {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 

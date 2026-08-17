@@ -12,7 +12,12 @@ public class SmallStone : MonoBehaviour
     
     void Start()
     {
-        player = GameObject.Find("Player").transform;
+        GameObject playerObject = GameObject.Find("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        
     }
     
 
@@ -43,7 +48,7 @@ public class SmallStone : MonoBehaviour
     {
         health -= damage;
 
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
