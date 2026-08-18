@@ -32,10 +32,14 @@ public class Spawner : MonoBehaviour
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
         randomDirection *= spawnDistance;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies.Length < maxEnemies)
+        if (player != null)
         {
-            Instantiate(enemyPrefab, player.position + (Vector3)randomDirection, Quaternion.identity);
+            if (enemies.Length < maxEnemies)
+            {
+                Instantiate(enemyPrefab, player.position + (Vector3)randomDirection, Quaternion.identity);
+            }
         }
+        
         
     }
 }
